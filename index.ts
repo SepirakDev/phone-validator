@@ -16,7 +16,7 @@ const phoneNumberUtil = PhoneNumberUtil.getInstance();
 
 const server = Bun.serve({
   port: process.env.PORT || '3000',
-  hostname: process.env.HOSTNAME || '0.0.0.0',
+  hostname: process.env.HOST || '0.0.0.0',
   async fetch(req, server) {
     logger.info({
       req: {
@@ -26,7 +26,7 @@ const server = Bun.serve({
       }, msg: 'Handling request'
     });
     const url = new URL(req.url);
-    if (url.pathname === '/health') {
+    if (url.pathname.startsWith('/health')) {
       return Response.json({'health': 'OK'})
     }
 
@@ -69,7 +69,7 @@ const server = Bun.serve({
       return Response.json({
         isValid,
         parsed: isValid ? phoneNumberUtil.format(parsedNumber, PhoneNumberFormat.E164) : undefined,
-        reason: !isValid ? 'Invalid phone number': undefined
+        reason: !isValid ? 'Invalid phone number' : undefined
       })
     } catch (error: any) {
       return Response.json({
