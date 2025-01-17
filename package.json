@@ -4,20 +4,22 @@
   "type": "module",
   "scripts": {
     "dev": "PRETTY_LOGS=true bun --watch index.ts",
-    "start": "bun run index.ts"
+    "start": "bun run index.ts",
+    "format": "prettier --config ./.prettierrc --write \"src/**/*.ts\""
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/google-libphonenumber": "^7.4.30",
-    "pino-pretty": "^13.0.0"
+    "prettier": "^3.4.2",
+    "wrangler": "^3.103.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@hono/valibot-validator": "^0.5.2",
     "google-libphonenumber": "^3.2.40",
-    "pino": "^9.6.0",
-    "serialize-error": "^12.0.0",
+    "hono": "^4.6.16",
     "valibot": "^1.0.0-beta.11"
   }
 }
